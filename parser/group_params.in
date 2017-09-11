@@ -1,0 +1,13 @@
+Group_ID:string
+Label:string
+No_of_Hosts:int
+TX_Range:float
+Buffer_Size:int
+Speed:int
+Mobile:bool
+Movement:string
+No_of_Trips:int
+Color:string
+Paths:list
+Protocol:string
+Junction_Delay:int

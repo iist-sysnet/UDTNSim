@@ -1,0 +1,22 @@
+Urban Delay Tolerant Network Simulator (UDTNSim-0.1)
+----------------------------------------------------
+
+Urban Delay Tolerant Network Simulator (UDTNSim) is platform for 
+carrying out experiments on mobility models and communication 
+protocols for Delay Tolerant Networks in road networks. 
+
+Pre-requisites for UDTNSim
+---------------------------
+UDTNSim is developed using Python-2.7. The following libraries need to 
+be installed before proceeding with the execution of the simulator.
+1. Numpy
+2. Tkinter
+
+How to execute the simulator?
+------------------------------
+
+The main file of the simulator is 'main.py' provided in the root 
+directory. Execute 'main.py' using Python with required settings in 
+the configuration file 'sim.config'.
+
+For any queries send mail to email: 4sarathbabu@gmail.com

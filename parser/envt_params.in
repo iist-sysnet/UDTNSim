@@ -1,0 +1,10 @@
+Simulation_Name:string
+Map:string
+Report_Directory:string
+No_of_Hosts_Groups:int
+GUI_Enabled:bool
+Map_Type:string
+Path_Types:dict
+Random_Msg_Gen_Parameter:list
+No_of_Simulations:int
+Simulation_Time:float

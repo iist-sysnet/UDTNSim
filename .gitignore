@@ -1,0 +1,11 @@
+# Avoid all temporary files
+*~
+
+# Avoid all python compiled objects
+*.pyc
+
+# Avoid all files in the logs directory
+logs/*
+
+# Keep the logs directory using .gitkeep
+!logs/.gitkeep
