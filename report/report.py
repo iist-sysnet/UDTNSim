@@ -4,9 +4,7 @@ from __future__ import division
 import os
 import shutil
 
-import initsim
 import textformat
-import maps
 import shared
 import simtimer
 
