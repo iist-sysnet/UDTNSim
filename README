@@ -19,4 +19,8 @@ The main file of the simulator is 'main.py' provided in the root
 directory. Execute 'main.py' using Python with required settings in 
 the configuration file 'sim.config'.
 
-For any queries send mail to email: 4sarathbabu@gmail.com
+A detailed documentation of the simulator is available at the link:
+https://arxiv.org/abs/1709.05645
+
+For any queries contact: 4sarathbabu@gmail.com, 
+gaurav.jain14@hotmail.com, and bsmanoj@ieee.org
