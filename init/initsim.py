@@ -161,7 +161,7 @@ def init_events(global_params):
         return False
 
     event_interval_list = numpy.random.exponential(event_interval, \
-                                                   no_of_event_points)
+                                                   int(no_of_event_points))
 
     i = 0
     for j in range(1, int(no_of_event_points)):

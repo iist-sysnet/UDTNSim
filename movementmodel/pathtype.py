@@ -23,7 +23,7 @@ class PathTypeMovement(sr.SimpleRandomMovement):
           ['Paths']
 
         # Nodes (junctions) of the road network
-        nodes = global_params.road_graph.nodes()
+        nodes = list(global_params.road_graph.nodes())
 
         # Choose a node (junction) at random which is connected to
         # at least one path which has the type in which the object can move

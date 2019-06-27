@@ -44,7 +44,7 @@ class Stationary:
 
     ## Function to compute initial node for the simulation
     def compute_initial_node(self, global_params):
-        nodes = global_params.road_graph.nodes()
+        nodes = list(global_params.road_graph.nodes())
 
         # Choose a random node from the graph
         initial_node = random.choice(nodes)
