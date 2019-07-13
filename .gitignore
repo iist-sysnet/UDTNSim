@@ -7,5 +7,8 @@
 # Avoid all files in the logs directory
 logs/*
 
+# Avoid all __pycache__ folders
+*/__pycache__
+
 # Keep the logs directory using .gitkeep
 !logs/.gitkeep
