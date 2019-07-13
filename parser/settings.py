@@ -1,15 +1,16 @@
 """ Class for reading the environment settings for the DTN environment.
-    It contains the attributes for each of the group of nodes 
+    It contains the attributes for each of the group of nodes
     (mobile/stationary)."""
 from __future__ import division
 import textformat
 
+
 class Settings:
     """ ENVIRONMENT SETTINGS """
-    
+
     envt_params = {}
     hosts_group_params = {}
-    
+
     txt_format_obj = textformat.Colors()
 
     def __init__(self, settings_file):
@@ -32,13 +33,12 @@ class Settings:
         file_ptr.close()
 
     def print_error(self, line_no, error_msg):
-        print 'Error: Line No. %d: %s' % (line_no, error_msg)
+        print ('Error: Line No. %d: %s' % (line_no, error_msg))
         return
-
 
     def type_check(self, attribute, value, in_group):
         """ Checking the type of an environment attribute. """
-        
+
         if in_group:
             required_type = Settings.hosts_group_params[attribute]
         else:
@@ -57,7 +57,7 @@ class Settings:
                 val = float(value)
                 return True, val
             except ValueError:
-                return False, None                
+                return False, None
 
         elif required_type == 'bool':
             if value == 'True':
@@ -66,7 +66,7 @@ class Settings:
                 return True, False
             else:
                 return False, None
-                
+
         elif required_type == 'dict':
             value_str = value[1: -1]
             comps = value_str.split(',')
@@ -78,7 +78,7 @@ class Settings:
                 except ValueError:
                     return False, None
             return True, local_dict
-            
+
         elif required_type == 'list':
             if value == 'None':
                 return True, []
@@ -93,19 +93,16 @@ class Settings:
                 except ValueError:
                     return False, None
             return True, temp
-            
         else:
             return True, value
-        
 
-    ## Function for reading the 'settings.dtn' file
+    # Function for reading the 'settings.dtn' file
     def read_settings(self):
         """ Start and read all the attributes from settings file """
-        
+
         self.txt_format_obj.print_msg('BLUE', 'Reading settings.')
         file_ptr = open(self.settings_file, 'r')
         in_group = False
-        in_path_type = False
         line_no = 0
         group_count = 0
 
@@ -117,31 +114,27 @@ class Settings:
             line = line.replace(' ', '')
             line = line.strip('\n')
 
-            
-            if line.startswith('#'): # Discarding comments
+            if line.startswith('#'):  # Discarding comments
                 continue
-            
+
             # Environment specific parameter
-            elif line.find('=') + 1 and not in_group: 
+            elif line.find('=') + 1 and not in_group:
                 components = line.split('=')
                 if len(components) < 2:
                     self.print_error(line_no, 'Attribute or value missing.')
                     return False
                 elif components[0] not in Settings.envt_params:
-                    self.print_error(line_no, 'Invalid attribute %s.' \
-                                     % (components[0]))
+                    self.print_error(line_no, 'Invalid attribute %s.' % (components[0]))
                     return False
                 elif components[0] == 'Path_Types':
                     list_str = components[1]
-                    if components[1][-1] <> ']':
+                    if components[1][-1] != ']':
                         list_line = file_ptr.readline()
-                        print list_line
-                        while list_line and list_line[-2] <> ']' and \
-                              not (list_line.find(':') + 1) and \
-                              not (list_line.find('[') + 1):
+                        print (list_line)
+                        while list_line and list_line[-2] != ']' and not (list_line.find(':') + 1) and not (list_line.find('[') + 1):
                             list_str += list_line
                             list_line = file_ptr.readline()
-                            print list_line
+                            print (list_line)
                         if list_line[-2] == ']':
                             list_str += list_line
                             list_str = list_str.replace(' ', '')
@@ -150,14 +143,13 @@ class Settings:
                         else:
                             return False
 
-                status, value = self.type_check(components[0], components[1],\
+                status, value = self.type_check(components[0], components[1],
                                                 in_group)
                 if status:
                     self.envt[components[0]] = value
                 else:
-                    self.print_error(line_no, 'Invalid attribute type - %s'\
-                                     % (components[1]))
-                    return False                        
+                    self.print_error(line_no, 'Invalid attribute type - %s' % (components[1]))
+                    return False
 
             # Group specific parameter
             elif line.find('=') + 1 and in_group:
@@ -166,14 +158,12 @@ class Settings:
                     self.print_error(line_no, 'Attribute or value missing.')
                     return False
                 elif components[0] not in Settings.hosts_group_params:
-                    self.print_error(line_no, 'Invalid node attribute %s.'\
-                                     % (components[1]))
+                    self.print_error(line_no, 'Invalid node attribute %s.' % (components[1]))
                     return False
                 elif components[0] == 'TX_Range':
                     unit = components[1][-1]
                     if unit not in ['m', 'M', 'k', 'K']:
-                        self.print_error(line_no, 'Invalid unit for %s.'\
-                                          % (components[0]))
+                        self.print_error(line_no, 'Invalid unit for %s.' % (components[0]))
                         return False
                     else:
                         if unit in ['m', 'M']:
@@ -183,8 +173,7 @@ class Settings:
                 elif components[0] == 'Buffer_Size':
                     unit = components[1][-1]
                     if unit not in ['K', 'M', 'G']:
-                        self.print_error(line_no, 'Invalid unit for %s.'\
-                                         % (components[1]))
+                        self.print_error(line_no, 'Invalid unit for %s.' % (components[1]))
                         return False
                     else:
                         components[1] = components[1][: -1]
@@ -192,18 +181,17 @@ class Settings:
                     group_ID = components[1]
                     continue
 
-                status, value = self.type_check(components[0], components[1],\
-                                                in_group)
+                status, value = self.type_check(components[0],
+                                                components[1], in_group)
                 if status:
                     if components[0] == 'Paths':
                         for val in value:
                             if val not in self.envt['Path_Types'].values():
-                                self.print_error(line_no, \
-                                                 'Invalid path IDs given')
+                                self.print_error(line_no, 'Invalid path IDs')
                                 return False
-            
+
                 if status:
-                    group_attrs[components[0]] = value                        
+                    group_attrs[components[0]] = value
                 else:
                     self.print_error(line_no, 'Invalid attribute type, %s.'\
                                      % (components[1]))
@@ -211,7 +199,6 @@ class Settings:
 
             # Starting of '{' means starting of group parameter description
             elif line == '{':
-                host_attr_count = 0
                 in_group = True
                 group_attrs = {}
 
@@ -228,11 +215,10 @@ class Settings:
                 self.print_error(line_no, 'Invalid text.')
                 return False
 
-            
         if group_count < self.envt['No_of_Hosts_Groups']:
-            self.print_error(line_no, 'No. of hosts group defined is ' + \
-                             'less than specified.')
+            self.print_error(line_no, 'No. of hosts group defined is less than specified.')
             return False
-                             
+
         self.txt_format_obj.print_msg('GREEN', 'Done')
+
         return True

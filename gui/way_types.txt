@@ -1,0 +1,12 @@
+motorway 1 gray
+trunk 2 blue
+primary 3 purple1
+secondary 4 gold
+tertiary 5 OliveDrab1
+unclassified 6 red
+residential 7 khaki2
+service 8 salmon
+living_street 9 cyan
+pedestrian 10 SpringGreen4
+cycleway 11 DeepSkyBlue2
+footway 12 black

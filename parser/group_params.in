@@ -11,3 +11,5 @@ Color:string
 Paths:list
 Protocol:string
 Junction_Delay:int
+Events:int
+Event_Life:float

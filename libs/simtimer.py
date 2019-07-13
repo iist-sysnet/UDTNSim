@@ -2,7 +2,8 @@
 from __future__ import division
 import geocalc
 
-## Function to convert hours in HH:MM:SS format
+
+# Function to convert hours in HH:MM:SS format
 def convert_HMS(hours):
     seconds = hours * 3600
     minutes, seconds = divmod(seconds, 60)
@@ -12,12 +13,13 @@ def convert_HMS(hours):
     return txt_timer
 
 
-## Function for creating the simulation timer/clock
+# Function for creating the simulation timer/clock
 def create_sim_timer(bounds, global_params):
     # Calculation of the geographical distance corresponding to a
     # pixel (pix_unit)
-    geo_pt1 = (bounds[0], bounds[1])
-    geo_pt2 = (bounds[2], bounds[1])
+
+    geo_pt1 = (float(bounds['minlat']), float(bounds['minlon']))
+    geo_pt2 = (float(bounds['maxlat']), float(bounds['minlon']))
 
     pix_pt1 = geocalc.geo_to_cart(geo_pt1, global_params.gui_params)
     pix_pt2 = geocalc.geo_to_cart(geo_pt2, global_params.gui_params)
@@ -45,13 +47,10 @@ def create_sim_timer(bounds, global_params):
     for group_id in speed_dict:
         try:
             pix_multiplier[group_id] = max_speed / speed_dict[group_id]
-        except:
+        except ZeroDivisionError:
             pix_multiplier[group_id] = 0
 
     # Simulator clock tick will be the pix_unit / maximum speed
     sim_tick = pix_unit / max_speed
 
     return sim_tick, pix_unit, pix_multiplier
-
-
-    

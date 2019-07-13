@@ -1,6 +1,7 @@
 ''' Module for the shared objects and variables '''
 
-## Class for creating an  object with required global parameters
+
+# Class for creating an  object with required global parameters
 class Shared:
     def __init__(self):
         # Environment and group parameters read from the 'settings.dtn' file
@@ -19,10 +20,10 @@ class Shared:
         self.gui_ob = None
 
         # The parameters required for GUI
-        self.gui_params = None
+        self.gui_params = {}
 
-        # Movement object list
-        self.mvmt_obj_list = None
+        # Movement objects dictionary (class-wise)
+        self.mvmt_obj_dict = {}
 
         # Simulator time
         self.sim_time = 0.0
@@ -37,8 +38,8 @@ class Shared:
         self.events_list = []
 
 
-## Class for simulation control variables. These are static variables
-## which are required and modified from different modules
+# Class for simulation control variables. These are static variables
+# which are required and modified from different modules
 class Controls:
     # Flag for pause/resume status of the simulator
     sim_pause_status = True
@@ -47,7 +48,7 @@ class Controls:
     # the stop button, the flag becomes 'True'
     sim_stop_status = False
 
-    # The counter for the number of simulations. 
+    # The counter for the number of simulations.
     no_of_simulation = 0
 
     # To make the GUI to a graph mode so that the road network will be
