@@ -65,7 +65,6 @@ def normalize_way_dict(node_dict, way_dict):
 
 
 def parse_osm(filename):
-    fp = open(filename)
     node_dict = {}
     way_dict = {}
     fp = open(filename, encoding='UTF-8')
