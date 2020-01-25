@@ -68,7 +68,7 @@ def parse_osm(filename):
     fp = open(filename)
     node_dict = {}
     way_dict = {}
-    fp = open(filename)
+    fp = open(filename, encoding='UTF-8')
     tag_info = ''
     in_tag_flag = False
     ready_to_parse = False
